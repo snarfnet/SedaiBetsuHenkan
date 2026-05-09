@@ -71,6 +71,43 @@ if not version_id or version_state in ('READY_FOR_DISTRIBUTION',):
 
 print(f'Version ID: {version_id} state={version_state}')
 
+# Set App Review Notes
+review_notes = """1. Screen recording: The app launches directly to the main screen. Users type or paste Japanese text, select a generation style (Ojisan/Uncle, Gal, Gen-Z, Showa Retro, or Chaos Mix), and tap the convert button. The converted text appears below with copy and share options. There are no accounts, logins, or paid features. ATT prompt appears for AdMob ad personalization.
+
+2. Tested on: iPhone 15 Pro (iOS 18.4), iPhone 16 Pro Max (iOS 18.4), iPhone SE 3rd gen (iOS 18.4)
+
+3. Purpose: A Japanese text style converter for entertainment. Users can transform ordinary Japanese text into different generational writing styles (uncle-style with excessive emojis, gal slang, Gen-Z abbreviations, formal Showa-era Japanese, or a random mix). Target audience: Japanese speakers who want to have fun with language differences across generations. It solves the problem of wanting to quickly create humorous text in different Japanese generational styles for messaging and social media.
+
+4. Setup: No login required. Launch the app, type any Japanese text in the input field, choose a style from the 5 options, and tap the convert button. Results can be copied or shared. The app works entirely offline with no network dependency for its core feature.
+
+5. External services:
+- Google AdMob: Banner and interstitial advertisements
+- No other external services. Text conversion is performed entirely on-device using local pattern matching.
+
+6. Regional differences: None. The app functions consistently across all regions. Content is in Japanese as the text conversion targets Japanese language styles.
+
+7. Not applicable. The app does not operate in a regulated industry and does not include protected third-party material."""
+
+r = api('GET', f'/appStoreVersions/{version_id}/appStoreReviewDetail')
+if r.status_code == 200 and r.json().get('data'):
+    detail_id = r.json()['data']['id']
+    r = api('PATCH', f'/appStoreReviewDetails/{detail_id}', json={
+        'data': {'type': 'appStoreReviewDetails', 'id': detail_id,
+                 'attributes': {'notes': review_notes}}
+    })
+    print(f'Review notes updated: {r.status_code}')
+else:
+    r = api('POST', '/appStoreReviewDetails', json={
+        'data': {
+            'type': 'appStoreReviewDetails',
+            'attributes': {'notes': review_notes},
+            'relationships': {
+                'appStoreVersion': {'data': {'type': 'appStoreVersions', 'id': version_id}}
+            }
+        }
+    })
+    print(f'Review notes created: {r.status_code}')
+
 r = api('PATCH', f'/appStoreVersions/{version_id}/relationships/build',
     json={'data': {'type': 'builds', 'id': build_id}})
 print(f'Build assigned: {r.status_code}')
