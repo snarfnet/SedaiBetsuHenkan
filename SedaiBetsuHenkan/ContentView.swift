@@ -29,6 +29,8 @@ struct ContentView: View {
                         .padding(.horizontal, 16)
                         .padding(.top, 12)
                         .padding(.bottom, 22)
+                        .frame(maxWidth: 600)
+                        .frame(maxWidth: .infinity)
                     }
                     .scrollIndicators(.hidden)
                 }
