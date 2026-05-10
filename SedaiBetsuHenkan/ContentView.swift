@@ -33,6 +33,7 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity)
                     }
                     .scrollIndicators(.hidden)
+                    .scrollDismissesKeyboard(.interactively)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(Palette.bg.opacity(0.9), for: .navigationBar)
@@ -160,7 +161,7 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 12) {
             sectionTitle("変換モード", icon: "person.3.fill")
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150, maximum: 280))], spacing: 10) {
                 ForEach(GenerationStyle.allCases) { style in
                     styleButton(style)
                 }
@@ -358,20 +359,24 @@ struct ContentView: View {
 
 private struct TimelineBackdrop: View {
     var body: some View {
-        ZStack {
-            Image("GeneratedTimelineBackground")
-                .resizable()
-                .scaledToFill()
-            Palette.bg.opacity(0.48)
-            LinearGradient(
-                colors: [
-                    Color.black.opacity(0.12),
-                    Color.black.opacity(0.36),
-                    Color.black.opacity(0.72)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+        GeometryReader { geo in
+            ZStack {
+                Image("GeneratedTimelineBackground")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped()
+                Palette.bg.opacity(0.48)
+                LinearGradient(
+                    colors: [
+                        Color.black.opacity(0.12),
+                        Color.black.opacity(0.36),
+                        Color.black.opacity(0.72)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
         }
     }
 }
