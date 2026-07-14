@@ -54,12 +54,12 @@ if version_state in ('WAITING_FOR_REVIEW', 'IN_REVIEW'):
     print(f'Already in review ({version_state}). Nothing to do.')
     sys.exit(0)
 
-if not version_id or version_state in ('READY_FOR_DISTRIBUTION',):
+if not version_id or version_state in ('READY_FOR_DISTRIBUTION', 'READY_FOR_SALE'):
     print('Creating new version...')
     r = api('POST', '/appStoreVersions', json={
         'data': {
             'type': 'appStoreVersions',
-            'attributes': {'platform': 'IOS', 'versionString': '1.0'},
+            'attributes': {'platform': 'IOS', 'versionString': '1.1'},
             'relationships': {'app': {'data': {'type': 'apps', 'id': APP_ID}}}
         }
     })
@@ -72,7 +72,7 @@ if not version_id or version_state in ('READY_FOR_DISTRIBUTION',):
 print(f'Version ID: {version_id} state={version_state}')
 
 # Set App Review Notes
-review_notes = """1. Screen recording: The app launches directly to the main screen. Users type or paste Japanese text, select a generation style (Ojisan/Uncle, Gal, Gen-Z, Showa Retro, or Chaos Mix), and tap the convert button. The converted text appears below with copy and share options. There are no accounts, logins, or paid features. ATT prompt appears for AdMob ad personalization.
+review_notes = """1. Screen recording: The app launches directly to the main screen. Users type or paste Japanese text, select a generation style (Ojisan/Uncle, Gal, Gen-Z, Showa Retro, or Chaos Mix), and tap the convert button. The converted text appears below with copy and share options. There are no accounts, logins, ads, or in-app purchases. This is a one-time paid app.
 
 2. Tested on: iPhone 15 Pro (iOS 18.4), iPhone 16 Pro Max (iOS 18.4), iPhone SE 3rd gen (iOS 18.4)
 
@@ -80,9 +80,7 @@ review_notes = """1. Screen recording: The app launches directly to the main scr
 
 4. Setup: No login required. Launch the app, type any Japanese text in the input field, choose a style from the 5 options, and tap the convert button. Results can be copied or shared. The app works entirely offline with no network dependency for its core feature.
 
-5. External services:
-- Google AdMob: Banner and interstitial advertisements
-- No other external services. Text conversion is performed entirely on-device using local pattern matching.
+5. External services: None. Text conversion is performed entirely on-device using local pattern matching. The app works fully offline.
 
 6. Regional differences: None. The app functions consistently across all regions. Content is in Japanese as the text conversion targets Japanese language styles.
 

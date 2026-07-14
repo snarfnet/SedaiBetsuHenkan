@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778485145828,
+  "projectRoot": "C:\\Users\\Windows\\SedaibetsuHenkan",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "scripts"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "screenshots": {
+      "path": "screenshots",
+      "purpose": null,
+      "fileCount": 20,
+      "lastAccessed": 1778485145785,
+      "keyFiles": [
+        "ipad-129-01.png",
+        "ipad-129-02.png",
+        "ipad-129-03.png",
+        "ipad-129-04.png",
+        "ipad-129-05.png"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 2,
+      "lastAccessed": 1778485145786,
+      "keyFiles": [
+        "generate_store_assets.py",
+        "submit.py"
+      ]
+    },
+    "SedaiBetsuHenkan": {
+      "path": "SedaiBetsuHenkan",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1778485145788,
+      "keyFiles": [
+        "BannerAdView.swift",
+        "ContentView.swift",
+        "InterstitialAdManager.swift",
+        "SedaiBetsuHenkanApp.swift",
+        "TextConverter.swift"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "project.yml",
+      "accessCount": 5,
+      "lastAccessed": 1784033925500,
+      "type": "file"
+    },
+    {
+      "path": "scripts\\submit.py",
+      "accessCount": 3,
+      "lastAccessed": 1784033947396,
+      "type": "file"
+    },
+    {
+      "path": "SedaiBetsuHenkan\\ContentView.swift",
+      "accessCount": 1,
+      "lastAccessed": 1784033801590,
+      "type": "file"
+    },
+    {
+      "path": "SedaiBetsuHenkan\\SedaiBetsuHenkanApp.swift",
+      "accessCount": 1,
+      "lastAccessed": 1784033806324,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

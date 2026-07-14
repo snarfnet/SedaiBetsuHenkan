@@ -1,13 +1,10 @@
 import SwiftUI
 
-private let kBannerAdID = "ca-app-pub-9404799280370656/5530418067"
-
 struct ContentView: View {
     @State private var inputText = ""
     @State private var outputText = ""
     @State private var selectedStyle: GenerationStyle = .gal
     @State private var showCopied = false
-    @StateObject private var interstitialManager = InterstitialAdManager()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -50,13 +47,6 @@ struct ContentView: View {
                     }
                 }
             }
-
-            BannerAdView(adUnitID: kBannerAdID)
-                .frame(height: 50)
-                .background(Color.black)
-        }
-        .task {
-            interstitialManager.loadAd()
         }
     }
 
@@ -353,7 +343,6 @@ struct ContentView: View {
     private func convert() {
         guard !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         outputText = TextConverter.convert(inputText, style: selectedStyle)
-        interstitialManager.countConvert()
     }
 }
 
